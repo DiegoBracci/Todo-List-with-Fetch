@@ -22,8 +22,8 @@ export const TodoList = props => {
 				label: newTask,
 				done: true
 			});
-			// setNewTask("");
-			//setTodoList(todoList.concat(newTask));
+			setNewTask("");
+			setTodoList(todoList.concat(newTask));
 
 			useEffect(
 				() =>
