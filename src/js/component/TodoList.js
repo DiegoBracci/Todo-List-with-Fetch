@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
-import PropTypes from "prop-types";
+import PropTypes, { func } from "prop-types";
 
 export const TodoList = props => {
 	const [todoList, setTodoList] = useState([]);
@@ -9,7 +9,7 @@ export const TodoList = props => {
 	useEffect(
 		() =>
 			fetch(
-				"https://assets.breatheco.de/apis/fake/todos/user/alesanchezr"
+				"https://assets.breatheco.de/apis/fake/todos/user/braccinunca"
 			)
 				.then(r => r.json())
 				.then(data => setTodoList(data)),
@@ -23,29 +23,37 @@ export const TodoList = props => {
 				done: true
 			});
 			setNewTask("");
-			setTodoList(todoList.concat(newTask));
-
-			useEffect(
-				() =>
-					fetch(
-						"https://assets.breatheco.de/apis/fake/todos/user/alesanchezr",
-						{
-							method: "PUT",
-							body: JSON.stringify(todoList),
-							headers: { "Content-type": "aplications/json" }
-						}
-					)
-						.then(r => r.json())
-						.then(data => {
-							setTodoList(addList);
-						}),
-				[]
-			);
+			setTodoList(addList);
+			putData(addList);
 		}
 	};
 
+	function putData(data) {
+		fetch("https://assets.breatheco.de/apis/fake/todos/user/braccinunca", {
+			method: "PUT",
+			body: JSON.stringify(data),
+			headers: { "Content-type": "applications/json" }
+		})
+			.then(r => r.json())
+			.then(data => {
+				console.log(data);
+			});
+	}
+	function deleteData(data) {
+		fetch("https://assets.breatheco.de/apis/fake/todos/user/braccinunca", {
+			method: "PUT",
+			body: JSON.stringify(data),
+			headers: { "Content-type": "applications/json" }
+		})
+			.then(r => r.json())
+			.then(data => {
+				console.log(data);
+			});
+	}
+
 	const deleteTask = value => {
 		setTodoList(todoList.filter(task => task !== value));
+		deleteData(todoList);
 	};
 
 	return (
