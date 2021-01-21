@@ -32,28 +32,15 @@ export const TodoList = props => {
 		fetch("https://assets.breatheco.de/apis/fake/todos/user/braccinunca", {
 			method: "PUT",
 			body: JSON.stringify(data),
-			headers: { "Content-type": "applications/json" }
+			headers: { "Content-Type": "application/json" }
 		})
 			.then(r => r.json())
 			.then(data => {
 				console.log(data);
 			});
 	}
-	function deleteData(data) {
-		fetch("https://assets.breatheco.de/apis/fake/todos/user/braccinunca", {
-			method: "PUT",
-			body: JSON.stringify(data),
-			headers: { "Content-type": "applications/json" }
-		})
-			.then(r => r.json())
-			.then(data => {
-				console.log(data);
-			});
-	}
-
 	const deleteTask = value => {
 		setTodoList(todoList.filter(task => task !== value));
-		deleteData(todoList);
 	};
 
 	return (
