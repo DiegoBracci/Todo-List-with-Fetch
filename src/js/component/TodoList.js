@@ -20,7 +20,7 @@ export const TodoList = props => {
 		if (event.key === "Enter" && newTask != "") {
 			let addList = todoList.concat({
 				label: newTask,
-				done: true
+				done: false
 			});
 			setNewTask("");
 			setTodoList(addList);
@@ -39,8 +39,11 @@ export const TodoList = props => {
 				console.log(data);
 			});
 	}
+
 	const deleteTask = value => {
-		setTodoList(todoList.filter(task => task !== value));
+		const newTodoList = todoList.filter(task => task !== value);
+		setTodoList(newTodoList);
+		putData(newTodoList);
 	};
 
 	return (
@@ -54,7 +57,7 @@ export const TodoList = props => {
 			<ul>
 				{todoList.map((item, index) => (
 					<li key={index}>
-						{item.label} : {item.done ? "yes" : "no"}
+						{item.label} : {item.done ? "Hecho" : "Pendiente"}
 						<label
 							onClick={() => {
 								deleteTask(item);
